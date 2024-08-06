@@ -1,0 +1,28 @@
+s= "eceba"
+output : 3 ece
+
+s= "ccaabbb"
+output : 5 aabbb
+
+int lengthOfLongestSubstringTwoDistinct(string s){
+    int c = 0;
+    unordered_map<char,int> freq;
+    int j = 0;
+    for(int i = 0;i<s.size();i++) {
+    	int dist = 0;
+	if(freq.find(s[i])==freq.end()){
+	   dist++;
+	}
+        freq[i]++;
+	while(dist>2){
+	   freq[s[j]--;
+	   if(freq[s[j]]==0){
+             freq.erase(s[j]);
+	     dist--;
+	   }
+	   j++;
+ 	}
+	c = max(c,i-j+1);
+    }
+    return c;
+}

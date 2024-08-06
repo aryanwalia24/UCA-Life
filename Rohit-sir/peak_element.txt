@@ -1,0 +1,24 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+	vector<int> arr{0,1,0};
+	vector<int> arr1{0,2,1,0};
+	vector<int> arr2{0,10,5,2};
+	
+	int n = arr.size();
+	int l = 0;
+	int r = n-1;
+	while(l<r){
+		int mid = l+(r-l)>>1;
+		if (arr[mid] < arr[mid+1]) {
+            l = mid + 1;
+		} else {
+            r = mid;
+        }
+	}
+	
+	cout<<"Peak Ele : "<<arr[r]<<endl;
+	cout<<"Peak Ele index : "<<r<<endl;
+	return 0;
+}
