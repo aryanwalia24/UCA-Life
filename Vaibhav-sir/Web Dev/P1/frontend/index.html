@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Program 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=0.1">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- for non-blocking mode(download js before rendering) -->
+    <!-- <script src="index.js" async></script> -->
+    <script src="data.js" async></script>
+
+    <!-- making index.js defer doesn't affect much, defering data.js leads to undefined error -->
+    <!-- use defer mode to execute the file after 1 cycle (at last) -->
+    <!-- defer => use at last -->
+    <script src="index.js" defer></script>
+
+    <div class="header">Food Ordereing Site</div>
+    <div id="jsworld"></div>
+    <div id="container">
+        <div id="extra">Extra Table</div>
+        <div id="productMenu">s</div>
+    </div>
+
+    <!-- Practise -->
+    <!-- <script>
+        let c = 10 + 20;
+        async function getDataFromApi(){
+            let result = await fetch("");
+            console.log(result);
+        }
+        getDataFromApi();
+        fetch("http://localhost:8080/").then((data) => {
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+        }).finally(() => {
+            console.log("finally called");
+        });
+        console.log(c);
+    </script> -->
+
+    <!-- Weather Api (localStorage/Navigator/Api) -->
+    <!-- <script src="script.js" async></script>
+    <input type="text" id="city-input">
+    <button id="btn">Submit</button>
+
+    <div>
+        <h3 id="city-name">Canada, Ontario - Toronto</h3>
+        <h6 id="city-time">Localtime</h6>
+        <p id="city-temp">13</p>
+    </div> -->
+</body>
+
+</html>

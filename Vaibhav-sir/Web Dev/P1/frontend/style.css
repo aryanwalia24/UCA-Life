@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    overflow-x: hidden;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+#productMenu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+}
+
+div {
+    margin: 20px;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1rem;
+}
+
+.productMenu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    background-color: grey;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #000 #0000;
+    animation: l1 1s infinite;
+    margin: auto;
+}
+
+@keyframes l1 {
+    to {
+        transform: rotate(.5turn)
+    }
+}
