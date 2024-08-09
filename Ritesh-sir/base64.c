@@ -1,70 +1,116 @@
 #include <stdio.h>
-char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
 
-void encode(int n, char arr[100])
+char lookup[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+char *encode(char *data, int len)
 {
-    char rev[100];
-    int idx = 0;
-    while (n != 0)
-    {
-        char c = chars[n % 64];
-        rev[idx++] = c;
-        n /= 64;
-    }
+    int out_len = 4 * ((len + 2) / 3);
+    char *out = (char *)malloc(out_len + 1);
+    if (out == NULL)
+        return NULL;
 
-    for (int i = 0; i < idx; i++)
+    int i = 0, j = 0;
+    while (i < len)
     {
-        arr[i] = rev[idx - i - 1];
+        int n = (data[i++] << 16);
+        if (i < len)
+            n |= (data[i++] << 8);
+        if (i < len)
+            n |= data[i++];
+
+        out[j++] = lookup[(n >> 18) & 63];
+        out[j++] = lookup[(n >> 12) & 63];
+        out[j++] = (i > len + 1) ? '=' : lookup[(n >> 6) & 63];
+        out[j++] = (i > len) ? '=' : lookup[n & 63];
     }
-    arr[idx] = '\0';
+    out[j] = '\0';
+
+    return out;
 }
 
-int getVal(char c)
+int lookup_index(char c)
 {
+    if (c >= 'A' && c <= 'Z')
+        return c - 'A';
     if (c >= 'a' && c <= 'z')
-    {
-        return (int)c - 97; // or just do c-'a';
-    }
-    else if (c >= 'A' && c <= 'Z')
-    {
-        return (int)c - 64 + 26; // c - 'A' + 26;
-    }
-    else if (c >= '0' && c <= '9')
-    {
-        return (int)c - 48 + 52; // c - '0' + 52
-    }
-    else if (c == '/') // xtra chars
+        return c - 'a' + 26;
+    if (c >= '0' && c <= '9')
+        return c - '0' + 52;
+    if (c == '+')
         return 62;
-    else if (c == '+')
+    if (c == '/')
         return 63;
-    else
-        return -1; // invalid
+    return -1;
 }
 
-int decode(char arr[100])
+char *decode(char *data, int len)
 {
-    int res = 0;
-    for (int i = 0; arr[i] != '\0'; i++)
+    if (len % 4 != 0)
+        return NULL;
+
+    int out_len = len / 4 * 3;
+    if (data[len - 1] == '=')
+        out_len--;
+    if (data[len - 2] == '=')
+        out_len--;
+
+    char *out = (char *)malloc(out_len + 1);
+    if (out == NULL)
+        return NULL;
+
+    int i = 0, j = 0;
+    while (i < len)
     {
-        int num = getVal(arr[i]);
-        res = res * 64 + num;
+        int n = (lookup_index(data[i++]) << 18);
+        n |= (lookup_index(data[i++]) << 12);
+        n |= (lookup_index(data[i++]) << 6);
+        n |= lookup_index(data[i++]);
+
+        if (j < out_len)
+            out[j++] = (n >> 16) & 255;
+        if (j < out_len)
+            out[j++] = (n >> 8) & 255;
+        if (j < out_len)
+            out[j++] = n & 255;
     }
-    return res;
+    out[j] = '\0';
+
+    return out;
+}
+
+void sample()
+{
+    char *data = "Hyyy Y!";
+    char *encoded = encode(data, strlen(data));
+    printf("Encoded: %s\n", encoded);
+    char *decoded = decode(encoded, strlen(encoded));
+    printf("Decoded: %s\n", decoded);
+    assert(strcmp(data, decoded) == 0);
+
+    data = "Despo779";
+    encoded = encode(data, strlen(data));
+    printf("Encoded: %s\n", encoded);
+    decoded = decode(encoded, strlen(encoded));
+    printf("Decoded: %s\n", decoded);
+    assert(strcmp(data, decoded) == 0);
+
+    data = "run While u Can";
+    encoded = encode(data, strlen(data));
+    printf("Encoded: %s\n", encoded);
+    decoded = decode(encoded, strlen(encoded));
+    printf("Decoded: %s\n", decoded);
+    assert(strcmp(data, decoded) == 0);
+
+    free(encoded);
+    free(decoded);
 }
 
 int main()
 {
-    int n = 64;
-    // 63 = '/'
-    // 64 = 'ba'
-    // 65 = 'bb'
-    // 128 = 'ca'
-    char encoded[100];
-
-    encode(n, encoded);
-    int dec = decode(encoded);
-    printf("Number  : %d", n);
-    printf("\nEncoded : %s", encoded);
-    printf("\nDecoded : %d", dec);
+    sample();
+    printf("Success!\n");
     return 0;
 }
