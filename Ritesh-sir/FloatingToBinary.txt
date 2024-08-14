@@ -1,0 +1,80 @@
+# Convert Floating Numbers to Binary format (vice versa)
+
+Say you have a number 5.5
+how will you represent it to computer
+in bits (some IEE 754 format)
+that is
+sign-bit - 7 exp bits - 23 decimal bits(mantissa)
+
+so,
+say number is 5.5
+convert to binary
+integer 5 -> 101
+decimal .5 -> 
+    steps : 
+        0.5*2 = 1.0 (take the integer part (1) if this)
+        0.5 -> 0.1
+
+so 5.5 -> 101.1
+
+now, just have 1 as integer (left shift but preserve bits after decimal)
+101.1 -> 1.011 
+EXP = no of 1 after decimal
+EXP = 2;
+Add it to bias(127)
+so Number is now 127+2
+129
+
+convert to sign and exp bits
+129 -> 01000001 -> 0 1000001
+sign -> 0
+7 exp bits -> 1000001
+
+and now that we convert the decimal to 1.011
+take the 011 and padd the additional bits to make 23 bits
+1.011 -> 0.11 (just take decimal part)
+
+so afterall this 5.5 is converted to IEEE 754 format like
+
+5.5 in 32 bit: 
+5.5 -> 0 1000001 01100000000000000000000
+
+now you can convert it back n forth,use the UCA brain
+
+Sir
+Convert 1000001.011 back to 5.5
+integer part -> 1000001 in dec = 129
+EXP = 129 - bias(127) = 2
+129 in binary 
+010000001
+extract bits
+0 10000001 01100000000000000000000
+(sign) (exp bits) (23 bits mantissa)
+
+Use the Formula:
+(-1)^sign-bit  × (1+mantissa) ×  2^EXP
+
+step 1:
+-1^0 = 1
+
+step 2:
+1+ mantissa = 1 + .375
+
+how do i get .375 :
+steps:
+    use mantisaa 01100000000000000000000
+    1. take bits in order left to right -> 0 1 1 0 0 ....
+    2. 0/2^1 = 0
+    3. 1/2^2 = .25
+    4. 1/2^3 = .125
+    5/ 0/2^4 = 0
+    6.. rest all are 0 so leave them
+    add it 0/2 + 1/4 + 1/8 + ...
+    that is .375
+
+step 3:
+2*2 = 4
+
+Finally : 
+1*1.374*4 = 5.5 (BOOM DONE)
+
