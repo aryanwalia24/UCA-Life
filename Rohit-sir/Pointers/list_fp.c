@@ -45,7 +45,9 @@ int compareInt(const void *a, const void *b) {
 }
 
 int compareString(const void *a, const void *b) {
-    return strcmp(*(char **)a, *(char **)b);
+    const char *strA = *(const char **)a;
+    const char *strB = *(const char **)b;
+    return strcmp(strA, strB);
 }
 
 void sortList(List *list, int (*compareFunc)(const void *, const void *)) {
