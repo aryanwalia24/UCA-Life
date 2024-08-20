@@ -6,31 +6,30 @@ int main()
 {
     int n = 10;
     int *arr = (int *)malloc(n * sizeof(int));
-    int idx = 0;
 
     for (int i = 0; i < n; i++)
     {
         arr[i] = i + 1;
     }
 
-    push(arr, &idx, 50);
-    push(arr, &idx, 60);
-    push(arr, &idx, 70);
+    push(arr, &n, 50);
+    push(arr, &n, 60);
+    push(arr, &n, 70);
 
-    printf("Size of arr now: %d\n", n + idx);
-    for (int i = 0; i < n + idx; i++)
+    printf("Size of arr now: %d\n", n);
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", arr[i]);
     }
     printf("\n");
 
-    pop(arr, &idx);
-    pop(arr, &idx);
-    pop(arr, &idx);
-    pop(arr, &idx);
+    pop(arr, &n);
+    pop(arr, &n);
+    pop(arr, &n);
+    pop(arr, &n);
 
-    printf("Size of arr now: %d\n", n + idx);
-    for (int i = 0; i < n + idx; i++)
+    printf("Size of arr now: %d\n", n);
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", arr[i]);
     }

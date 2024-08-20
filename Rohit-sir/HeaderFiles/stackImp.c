@@ -2,7 +2,7 @@
 
 void push(int *arr, int *idx, int val)
 {
-    arr[*idx + 10] = val;
+    arr[*idx] = val;
     (*idx)++;
 }
 
@@ -14,6 +14,6 @@ int pop(int *arr, int *idx)
     }
 
     (*idx)--;
-    arr[*idx + 10] = 0;
-    return arr[*idx + 10];
+    arr[*idx] = 0;
+    return arr[*idx];
 }
