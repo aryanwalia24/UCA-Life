@@ -1,0 +1,12 @@
+void helper(int n, char src, char help, char dest) {
+   if (n == 1) {
+      cout << "Shift " << n << "From " << src << " to " << dest << endl;
+      return;
+   }
+   helper(n - 1, src, dest, help);
+   cout << "Shift " << n << "From " << src << " to " << dest << endl;
+   helper(n - 1, help, src, , dest);
+}
+void towerOfHanoi(int n) {
+   helper(n, 'A', 'B', 'C');
+}

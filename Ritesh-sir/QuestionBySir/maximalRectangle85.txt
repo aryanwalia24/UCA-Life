@@ -1,0 +1,34 @@
+int maxArea(vector<int>& heights) {
+    int area = 0;
+    stack<int> st;
+    st.push(-1);
+    heights.push_back(-1);
+    for (int i = 0; i < heights.size(); i++) {
+        while (st.top() != -1 && heights[st.top()] > heights[i]) {
+            int l = heights[st.top()];
+            st.pop();
+            int b = i - st.top() - 1;
+            area = max(area, l * b);
+        }
+        st.push(i);
+    }
+    return area;
+}
+int maximalRectangle(vector<vector<char>>& matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    vector<int> nums(cols, 0);
+    int maxR = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] == '1') {
+                nums[j]++;
+            } else {
+                nums[j] = 0;
+            }
+        }
+        int area = maxArea(nums);
+        maxR = max(maxR, area);
+    }
+    return maxR;
+}

@@ -1,0 +1,14 @@
+long long int PowMod(long long int x,long long int n,long long int m)
+{  
+    long long res = 1;
+    while(n!=0){
+        if(n&1){
+            res = (res*x)%m;
+            n--;
+        }   
+        x = (x*x)%m;
+        n/=2;
+    }
+    return res;
+}
+
