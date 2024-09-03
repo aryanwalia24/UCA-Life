@@ -1,4 +1,11 @@
 **/node_modules
-*.exe
-*.out
 *.vscode
+
+# Compiled files
+*.out
+*.exe
+
+# Exlude .class files
+*.class
+.idea
+/out
