@@ -32,9 +32,12 @@ export function SignUp() {
       console.log("Submit this form");
 
       // Make an api/web service call to submit the user details
-      var response = await fetch("http://localhost:3001/users", {
+      var response = await fetch("http://localhost:8080/users", {
         method: "POST",
-        body: JSON.stringify({ ...formValuesObject, id: "abc" }),
+        body: JSON.stringify({ id: new Date().getTime().toString() , ...formValuesObject  }),
+        headers: {
+          "Content-Type": "application/json",
+        }
       });
       if (
         response.ok &&

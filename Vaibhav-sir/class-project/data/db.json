@@ -1,36 +1,14 @@
 {
   "posts": [
-    {
-      "id": "1",
-      "title": "a title",
-      "views": 100
-    },
-    {
-      "id": "2",
-      "title": "another title",
-      "views": 200
-    }
+    { "id": "1", "title": "a title", "views": 100 },
+    { "id": "2", "title": "another title", "views": 200 }
   ],
   "comments": [
-    {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "f2c3",
-      "text": "a comment about post 1",
-      "postId": "2"
-    }
+    { "id": "1", "text": "a comment about post 1", "postId": "1" },
+    { "id": "2", "text": "another comment about post 1", "postId": "1" },
+    { "id": "f2c3", "text": "a comment about post 1", "postId": "2" }
   ],
-  "profile": {
-    "name": "typicode"
-  },
+  "profile": { "name": "typicode" },
   "users": [
     {
       "id": "68ff",
@@ -45,28 +23,28 @@
       "lastName": "Walia",
       "email": "aryanwalia2303@gmail.com",
       "password": "12345"
+    },
+    {
+      "id": "1730921951707",
+      "firstName": "DV",
+      "lastName": "sharma",
+      "email": "amanssharma23234@gmail.com",
+      "password": "122"
+    },
+    {
+      "id": "1730922568643",
+      "firstName": "AS",
+      "lastName": "df",
+      "email": "waliaabhishek76@gmail.com",
+      "password": "8989"
     }
   ],
   "products": [
-    {
-      "id": "b467",
-      "productName": "Product name 5",
-      "productPrice": "200"
-    },
-    {
-      "id": "8901",
-      "productName": "Product 1",
-      "productPrice": "500"
-    },
-    {
-      "id": "b292",
-      "productName": "Product 1",
-      "productPrice": "500"
-    },
-    {
-      "productName": "Batman",
-      "productPrice": "1221",
-      "id": "5564"
-    }
+    { "productName": "Batman", "productPrice": "1221", "id": "5564" },
+    { "productName": "Superman", "productPrice": "20", "id": "c05d" },
+    { "id": "cd4c", "productName": "sde", "productPrice": "89" },
+    { "id": "f56e", "productName": "sdfff", "productPrice": "234" },
+    { "id": "1730922715552", "productName": "ds", "productPrice": "2345" },
+    { "id": "1730923321598", "productName": "wew", "productPrice": "22" }
   ]
 }

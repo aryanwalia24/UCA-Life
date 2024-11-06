@@ -35,7 +35,7 @@ function ProductList() {
   }, []);
 
   const fetchProductData = async () => {
-    var productsResponse = await fetch("http://localhost:3001/products");
+    var productsResponse = await fetch("http://localhost:8080/products");
     var productsList = await productsResponse.json();
 
     console.log("The products list is: ", productsList);
@@ -77,14 +77,15 @@ function ProductList() {
   };
 
   const deleteProductHandler = async () => {
-    // Make an api/web service call to submit the user details
-    var response = await fetch(
-      `http://localhost:3001/products/${selectedProductForDelete.id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    if (response.ok && (response.status == "201" || response.status == "200")) {
+    var response = await fetch("http://localhost:8080/products", {
+      method: "DELETE",
+      body: JSON.stringify({
+        id: selectedProductForDelete.id || selectedProductForDelete._id
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+  
+    if (response.ok && (response.status === 200 || response.status === 201)) {
       setShowFailureAlert(false);
       setShowSuccessAlert(true);
       setSelectedProductForDelete(null);
@@ -93,7 +94,6 @@ function ProductList() {
       setShowSuccessAlert(false);
       setShowFailureAlert(true);
     }
-    console.log("The response of POST API call is ", response);
   };
 
   return (
